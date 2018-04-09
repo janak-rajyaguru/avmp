@@ -110,25 +110,9 @@ android {
             dimension "abi"
             versionCode = 4
         }
-        x86 {
-            dimension "abi"
-            versionCode = 5
-        }
-        MIPS {
-            dimension "abi"
-            versionCode = 6
-        }
         ARMv8 {
             dimension "abi"
             versionCode = 7
-        }
-        x86_64 {
-            dimension "abi"
-            versionCode = 8
-        }
-        MIPS64 {
-            dimension "abi"
-            versionCode = 9
         }
     }
 
@@ -199,6 +183,10 @@ dependencies {
     kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
+
+    //added
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+//    compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
 }
 
 kotlin {

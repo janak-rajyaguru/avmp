@@ -142,9 +142,9 @@ public class ContentActivity extends AudioPlayerContainerActivity implements Sea
             case R.id.ml_menu_equalizer:
                 new EqualizerFragment().show(getSupportFragmentManager(), "equalizer");
                 return true;
-            case R.id.ml_menu_search:
+            /*case R.id.ml_menu_search:
                 startActivity(new Intent(Intent.ACTION_SEARCH, null, this, SearchActivity.class));
-                return true;
+                return true;*/
             case R.id.ml_menu_renderers:
                 if (mService != null && !mService.hasRenderer()
                         && RendererDelegate.INSTANCE.getRenderers().size() == 1) {

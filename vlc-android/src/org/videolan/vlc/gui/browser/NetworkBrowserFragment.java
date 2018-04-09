@@ -103,7 +103,7 @@ public class NetworkBrowserFragment extends BaseBrowserFragment implements Exter
             ExternalMonitor.unsubscribeNetworkCb(this);
         else
             ExternalMonitor.subscribeNetworkCb(this);
-        if (!mRoot || mFabPlay == null)
+        /*if (!mRoot || mFabPlay == null)
             return;
         if (hidden) {
             setFabPlayVisibility(false);
@@ -112,7 +112,7 @@ public class NetworkBrowserFragment extends BaseBrowserFragment implements Exter
             mFabPlay.setImageResource(R.drawable.ic_fab_add);
             mFabPlay.setOnClickListener(this);
             setFabPlayVisibility(true);
-        }
+        }*/
     }
 
     @Override

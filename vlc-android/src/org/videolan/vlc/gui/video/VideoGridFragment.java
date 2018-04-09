@@ -159,7 +159,7 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
             registerForContextMenu(mGridView);
             setSearchVisibility(false);
             updateViewMode();
-            mFabPlay.setImageResource(R.drawable.ic_fab_play);
+//            mFabPlay.setImageResource(R.drawable.ic_fab_play);
             setFabPlayVisibility(true);
             if (restart && !mMediaLibrary.isWorking()) updateList();
         } else {

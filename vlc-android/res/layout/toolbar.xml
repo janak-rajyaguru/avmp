@@ -19,7 +19,7 @@
         android:background="?attr/background_actionbar"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:titleMarginStart="@dimen/default_margin"
-        app:layout_scrollFlags="scroll|enterAlways"
+        app:layout_scrollFlags="snap"
         android:keyboardNavigationCluster="true"
         tools:targetApi="o" />
 </android.support.design.widget.AppBarLayout>

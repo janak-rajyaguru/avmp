@@ -95,11 +95,11 @@ public class StorageBrowserFragment extends FileBrowserFragment implements Entry
     @Override
     public void onStart() {
         super.onStart();
-        if (mRoot && mFabPlay != null) {
+        /*if (mRoot && mFabPlay != null) {
             mFabPlay.setImageResource(R.drawable.ic_fab_add);
             mFabPlay.setOnClickListener(this);
             setFabPlayVisibility(true);
-        }
+        }*/
         VLCApplication.getMLInstance().addEntryPointsEventsCb(this);
         if (mSnack != null)
             mSnack.show();
@@ -108,10 +108,10 @@ public class StorageBrowserFragment extends FileBrowserFragment implements Entry
     @Override
     public void onStop() {
         super.onStop();
-        if (mFabPlay != null) {
+        /*if (mFabPlay != null) {
             mFabPlay.setVisibility(View.GONE);
             mFabPlay.setOnClickListener(null);
-        }
+        }*/
         VLCApplication.getMLInstance().removeEntryPointsEventsCb(this);
         if (mSnack != null)
             mSnack.dismiss();

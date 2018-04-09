@@ -93,9 +93,9 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
     private Medialibrary mMediaLibrary;
     private ExtensionsManager mExtensionsManager;
-    private HackyDrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
-    private ActionBarDrawerToggle mDrawerToggle;
+//    private HackyDrawerLayout mDrawerLayout;
+//    private NavigationView mNavigationView;
+//    private ActionBarDrawerToggle mDrawerToggle;
 
     private int mCurrentFragmentId;
     private Fragment mCurrentFragment = null;
@@ -122,8 +122,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
         setContentView(R.layout.main);
 
-        mDrawerLayout = (HackyDrawerLayout) findViewById(R.id.root_container);
-        setupNavigationView();
+//        mDrawerLayout = (HackyDrawerLayout) findViewById(R.id.root_container);
+//        setupNavigationView();
 
         initAudioPlayerContainerActivity();
 
@@ -132,20 +132,20 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             mCurrentFragment = fm.getFragment(savedInstanceState, "current_fragment");
             //Restore fragments stack
             restoreFragmentsStack(savedInstanceState, fm);
-            mCurrentFragmentId = savedInstanceState.getInt("current", mSettings.getInt("fragment_id", R.id.nav_video));
+            mCurrentFragmentId = savedInstanceState.getInt("current", mSettings.getInt("fragment_id", R.id.nav_audio));
         } else {
             if (getIntent().getBooleanExtra(Constants.EXTRA_UPGRADE, false)) {
-            /*
-             * The sliding menu is automatically opened when the user closes
-             * the info dialog. If (for any reason) the dialog is not shown,
-             * open the menu after a short delay.
-             */
-            mActivityHandler.postDelayed(new Runnable() {
+                /*
+                 * The sliding menu is automatically opened when the user closes
+                 * the info dialog. If (for any reason) the dialog is not shown,
+                 * open the menu after a short delay.
+                 */
+            /*mActivityHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mDrawerLayout.openDrawer(mNavigationView);
                     }
-                }, 500);
+                }, 500);*/
             }
             reloadPreferences();
         }
@@ -155,7 +155,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
         /* Set up the sidebar click listener
          * no need to invalidate menu for now */
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+        /*mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -170,15 +170,15 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                if (mNavigationView.requestFocus())
-                    ((NavigationMenuView) mNavigationView.getFocusedChild()).setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+                *//*if (mNavigationView.requestFocus())
+                    ((NavigationMenuView) mNavigationView.getFocusedChild()).setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);*//*
             }
         };
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);*/
 
         /* Reload the latest preferences */
         mScanNeeded = savedInstanceState == null && mSettings.getBoolean("auto_rescan", true);
@@ -189,7 +189,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     private void restoreFragmentsStack(Bundle savedInstanceState, FragmentManager fm) {
         final List<Fragment> fragments = fm.getFragments();
         if (fragments != null) {
-            final FragmentTransaction ft =  fm.beginTransaction();
+            final FragmentTransaction ft = fm.beginTransaction();
             final Fragment displayed = fm.getFragment(savedInstanceState, "current_fragment_visible");
             for (Fragment fragment : fragments)
                 if (fragment != null) {
@@ -206,20 +206,13 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     }
 
     private void setupNavigationView() {
-        mNavigationView = (NavigationView) findViewById(R.id.navigation);
-        /*if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
+        /*mNavigationView = (NavigationView) findViewById(R.id.navigation);
+         *//*if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
             MenuItem item = mNavigationView.getMenu().findItem(R.id.nav_directories);
             item.setTitle(R.string.open);
-        }*/
+        }*//*
 
-        mNavigationView.getMenu().findItem(R.id.nav_history).setVisible(mSettings.getBoolean(PreferencesFragment.PLAYBACK_HISTORY, true));
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        mNavigationView.getMenu().findItem(R.id.nav_history).setVisible(mSettings.getBoolean(PreferencesFragment.PLAYBACK_HISTORY, true));*/
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -237,11 +230,11 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         if (mMediaLibrary.isInitiated()) {
             /* Load media items from database and storage */
             if (mScanNeeded && Permissions.canReadStorage(this))
-                startService(new Intent(Constants.ACTION_RELOAD, null,this, MediaParsingService.class));
+                startService(new Intent(Constants.ACTION_RELOAD, null, this, MediaParsingService.class));
             else if (!currentIdIsExtension())
                 restoreCurrentList();
         }
-        mNavigationView.setNavigationItemSelectedListener(this);
+//        mNavigationView.setNavigationItemSelectedListener(this);
         if (BuildConfig.DEBUG)
             createExtensionServiceConnection();
 //        mActivityHandler.post(new Runnable() {
@@ -255,7 +248,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     @Override
     protected void onStop() {
         super.onStop();
-        mNavigationView.setNavigationItemSelectedListener(null);
+//        mNavigationView.setNavigationItemSelectedListener(null);
         if (getChangingConfigurations() == 0) {
             /* Check for an ongoing scan that needs to be resumed during onResume */
             mScanNeeded = mMediaLibrary.isWorking();
@@ -278,8 +271,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             mExtensionManagerService.stopSelf();
             return;
         }
-        MenuItem extensionGroup = mNavigationView.getMenu().findItem(R.id.extensions_group);
-        extensionGroup.getSubMenu().clear();
+        /*MenuItem extensionGroup = mNavigationView.getMenu().findItem(R.id.extensions_group);
+        extensionGroup.getSubMenu().clear();*/
         for (int id = 0; id < plugins.size(); ++id) {
             final ExtensionListing extension = plugins.get(id);
             String key = "extension_" + extension.componentName().getPackageName();
@@ -289,10 +282,10 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 mExtensionsManager.showExtensionPermissionDialog(this, id, extension, key);
             }
         }
-        if (extensionGroup.getSubMenu().size() == 0)
+        /*if (extensionGroup.getSubMenu().size() == 0)
             extensionGroup.setVisible(false);
+        mNavigationView.invalidate();*/
         onPluginsLoaded();
-        mNavigationView.invalidate();
     }
 
     private void onPluginsLoaded() {
@@ -300,19 +293,21 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             if (mExtensionsManager.previousExtensionIsEnabled(getApplication()))
                 mExtensionManagerService.openExtension(mCurrentFragmentId);
             else
-                showFragment(R.id.nav_video);
+                showFragment(R.id.nav_audio);
     }
 
     private void createExtensionServiceConnection() {
         mExtensionServiceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mExtensionManagerService = ((ExtensionManagerService.LocalBinder)service).getService();
+                mExtensionManagerService = ((ExtensionManagerService.LocalBinder) service).getService();
                 mExtensionManagerService.setExtensionManagerActivity(MainActivity.this);
                 loadPlugins();
             }
+
             @Override
-            public void onServiceDisconnected(ComponentName name) {}
+            public void onServiceDisconnected(ComponentName name) {
+            }
         };
         // Bind service which discoverves au connects toplugins
         if (!bindService(new Intent(MainActivity.this,
@@ -341,10 +336,10 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     @Override
     public void onBackPressed() {
         /* Close the menu first */
-        if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+        /*if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
             mDrawerLayout.closeDrawer(mNavigationView);
             return;
-        }
+        }*/
 
         /* Close playlist search if open or Slide down the audio player if it is shown entirely. */
         if (isAudioPlayerReady() && (mAudioPlayer.clearSearch() || slideDownAudioPlayer()))
@@ -352,7 +347,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
         // If it's the directory view, a "backpressed" action shows a parent.
         final Fragment fragment = getCurrentFragment();
-        if (fragment instanceof BaseBrowserFragment && ((BaseBrowserFragment)fragment).goBack()){
+        if (fragment instanceof BaseBrowserFragment && ((BaseBrowserFragment) fragment).goBack()) {
             return;
         } else if (fragment instanceof ExtensionBrowser) {
             ((ExtensionBrowser) fragment).goBack();
@@ -411,13 +406,13 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             } else {
                 //case: extension to other extension root
                 clearBackstackFromClass(ExtensionBrowser.class);
-                while (getSupportFragmentManager().popBackStackImmediate());
+                while (getSupportFragmentManager().popBackStackImmediate()) ;
                 ft.remove(mCurrentFragment);
                 ft.add(R.id.fragment_placeholder, fragment, title);
                 mCurrentFragment = fragment;
             }
             ft.commit();
-            mNavigationView.getMenu().findItem(extensionId).setCheckable(true);
+//            mNavigationView.getMenu().findItem(extensionId).setCheckable(true);
             updateCheckedItem(extensionId);
             mCurrentFragmentId = extensionId;
         }
@@ -452,8 +447,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        mDrawerLayout.closeDrawer(mNavigationView);
-        UiTools.setKeyboardVisibility(mDrawerLayout, false);
+//        mDrawerLayout.closeDrawer(mNavigationView);
+//        UiTools.setKeyboardVisibility(mDrawerLayout, false);
 
         // Handle item selection
         switch (item.getItemId()) {
@@ -466,7 +461,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 if (slideDownAudioPlayer())
                     return true;
                 /* Toggle the sidebar */
-                return mDrawerToggle.onOptionsItemSelected(item);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -478,10 +473,10 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
 
     private void forceRefresh(Fragment current) {
         if (!mMediaLibrary.isWorking()) {
-            if(current != null && current instanceof IRefreshable)
+            if (current != null && current instanceof IRefreshable)
                 ((IRefreshable) current).refresh();
             else
-                startService(new Intent(Constants.ACTION_RELOAD, null,this, MediaParsingService.class));
+                startService(new Intent(Constants.ACTION_RELOAD, null, this, MediaParsingService.class));
         }
     }
 
@@ -491,7 +486,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         if (requestCode == ACTIVITY_RESULT_PREFERENCES) {
             switch (resultCode) {
                 case PreferencesActivity.RESULT_RESCAN:
-                    startService(new Intent(Constants.ACTION_RELOAD, null,this, MediaParsingService.class));
+                    startService(new Intent(Constants.ACTION_RELOAD, null, this, MediaParsingService.class));
                     break;
                 case PreferencesActivity.RESULT_RESTART:
                 case PreferencesActivity.RESULT_RESTART_APP:
@@ -506,9 +501,10 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                     break;
                 case PreferencesActivity.RESULT_UPDATE_ARTISTS:
                     final Fragment fragment = getCurrentFragment();
-                    if (fragment instanceof AudioBrowserFragment) ((AudioBrowserFragment) fragment).updateArtists();
+                    if (fragment instanceof AudioBrowserFragment)
+                        ((AudioBrowserFragment) fragment).updateArtists();
             }
-        } else if (requestCode == ACTIVITY_RESULT_OPEN && resultCode == RESULT_OK){
+        } else if (requestCode == ACTIVITY_RESULT_OPEN && resultCode == RESULT_OK) {
             MediaUtils.openUri(this, data.getData());
         } else if (requestCode == ACTIVITY_RESULT_SECONDARY) {
             if (resultCode == PreferencesActivity.RESULT_RESCAN) {
@@ -546,7 +542,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     }
 
     private void reloadPreferences() {
-        mCurrentFragmentId = mSettings.getInt("fragment_id", R.id.nav_video);
+        mCurrentFragmentId = mSettings.getInt("fragment_id", R.id.nav_audio);
     }
 
     @Override
@@ -563,7 +559,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // This should not happen
-        if(item == null)
+        /*if(item == null)
             return false;
 
         int id = item.getItemId();
@@ -585,7 +581,7 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                 return false;
             }
 
-            if (mCurrentFragmentId == id) { /* Already selected */
+            if (mCurrentFragmentId == id) { *//* Already selected *//*
                 // Go back at root level of current browser
                 if (current instanceof BaseBrowserFragment && !((BaseBrowserFragment) current).isRootDirectory()) {
                     getSupportFragmentManager().popBackStackImmediate(getTag(id), FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -604,21 +600,21 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
                     new MRLPanelFragment().show(getSupportFragmentManager(), "fragment_mrl");
                     break;
                 case R.id.nav_directories:
-                    /*if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
+                    *//*if (TextUtils.equals(BuildConfig.FLAVOR_target, "chrome")) {
                         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("audio*//* video*//*");
+                        intent.setType("audio*//**//* video*//**//*");
                         startActivityForResult(intent, ACTIVITY_RESULT_OPEN);
                         mDrawerLayout.closeDrawer(mNavigationView);
                         return true;
-                    }*/
+                    }*//*
                 default:
-                /* Slide down the audio player */
+                *//* Slide down the audio player *//*
                     slideDownAudioPlayer();
-                /* Switch the fragment */
+                *//* Switch the fragment *//*
                     showFragment(id);
             }
         }
-        mDrawerLayout.closeDrawer(mNavigationView);
+        mDrawerLayout.closeDrawer(mNavigationView);*/
         return true;
     }
 
@@ -629,13 +625,13 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
             case R.id.nav_about:
                 return;
             default:
-                if (id != mCurrentFragmentId && mNavigationView.getMenu().findItem(id) != null) {
+                /*if (id != mCurrentFragmentId && mNavigationView.getMenu().findItem(id) != null) {
                     if (mNavigationView.getMenu().findItem(mCurrentFragmentId) != null)
                         mNavigationView.getMenu().findItem(mCurrentFragmentId).setChecked(false);
                     mNavigationView.getMenu().findItem(id).setChecked(true);
-                    /* Save the tab status in pref */
+                    *//* Save the tab status in pref *//*
                     mSettings.edit().putInt("fragment_id", id).apply();
-                }
+                }*/
         }
     }
 
@@ -678,8 +674,8 @@ public class MainActivity extends ContentActivity implements FilterQueryProvider
         }
     }
 
-    private String getTag(int id){
-        switch (id){
+    private String getTag(int id) {
+        switch (id) {
             case R.id.nav_about:
                 return ID_ABOUT;
             case R.id.nav_settings:

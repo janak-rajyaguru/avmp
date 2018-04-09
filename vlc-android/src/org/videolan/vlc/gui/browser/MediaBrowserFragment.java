@@ -68,7 +68,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     protected volatile boolean mReadyToDisplay = true;
     protected Medialibrary mMediaLibrary;
     protected ActionMode mActionMode;
-    public FloatingActionButton mFabPlay;
+//    public FloatingActionButton mFabPlay;
     protected Menu mMenu;
 
     @Override
@@ -83,7 +83,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
         super.onViewCreated(view, savedInstanceState);
         if (mSwipeRefreshLayout != null)
             mSwipeRefreshLayout.setColorSchemeResources(R.color.orange700);
-            mFabPlay = getActivity().findViewById(R.id.fab);
+//            mFabPlay = getActivity().findViewById(R.id.fab);
     }
 
 
@@ -97,7 +97,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
             updateTitle();
-            if (mFabPlay != null) {
+            /*if (mFabPlay != null) {
                 setFabPlayVisibility(true);
                 mFabPlay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,7 +105,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
                         onFabPlayClick(v);
                     }
                 });
-            }
+            }*/
         }
         setUserVisibleHint(!hidden);
     }
@@ -134,8 +134,8 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     }
 
     public void setFabPlayVisibility(boolean enable) {
-        if (mFabPlay != null)
-            mFabPlay.setVisibility(enable ? View.VISIBLE : View.GONE);
+        /*if (mFabPlay != null)
+            mFabPlay.setVisibility(enable ? View.VISIBLE : View.GONE);*/
     }
 
     public void onFabPlayClick(View view) {}

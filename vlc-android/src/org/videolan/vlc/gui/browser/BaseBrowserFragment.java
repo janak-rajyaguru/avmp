@@ -224,10 +224,10 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
         super.onHiddenChanged(hidden);
         if (hidden) {
             releaseBrowser();
-        } else if (mFabPlay != null) {
+        } /*else if (mFabPlay != null) {
             mFabPlay.setImageResource(R.drawable.ic_fab_play);
             updateFab();
-        }
+        }*/
     }
 
     private void releaseBrowser() {
@@ -906,7 +906,7 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
     }
 
     private void updateFab() {
-        if (mFabPlay != null) {
+        /*if (mFabPlay != null) {
             if (mAdapter.getMediaCount() > 0) {
                 mFabPlay.setVisibility(View.VISIBLE);
                 mFabPlay.setOnClickListener(this);
@@ -914,7 +914,7 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
                 mFabPlay.setVisibility(View.GONE);
                 mFabPlay.setOnClickListener(null);
             }
-        }
+        }*/
     }
 
     public boolean isSortEnabled() {

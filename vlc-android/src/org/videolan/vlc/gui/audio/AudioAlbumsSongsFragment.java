@@ -153,7 +153,7 @@ public class AudioAlbumsSongsFragment extends BaseAudioBrowser implements SwipeR
             rv.setLayoutManager(llm);
             rv.setRecycledViewPool(rvp);
         }
-        mFabPlay.setImageResource(R.drawable.ic_fab_play);
+//        mFabPlay.setImageResource(R.drawable.ic_fab_play);
         mTabLayout.addOnTabSelectedListener(this);
         updateList();
     }

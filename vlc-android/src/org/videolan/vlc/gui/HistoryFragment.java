@@ -83,7 +83,7 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
         super.onActivityCreated(savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mHistoryAdapter);
-        mRecyclerView.setNextFocusUpId(R.id.ml_menu_search);
+//        mRecyclerView.setNextFocusUpId(R.id.ml_menu_search);
         mRecyclerView.setNextFocusLeftId(android.R.id.list);
         mRecyclerView.setNextFocusRightId(android.R.id.list);
         if (AndroidUtil.isHoneycombOrLater)

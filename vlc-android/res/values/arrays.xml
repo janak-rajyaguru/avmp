@@ -407,4 +407,13 @@
         <item>YUV</item>
     </string-array>
 
+    //added
+    <string-array name="bottom_navigation_options" translatable="false">
+        <item>Video</item>
+        <item>Audio</item>
+        <item>Folder</item>
+        <item>Settings</item>
+        <item>Rate Us</item>
+    </string-array>
+
 </resources>

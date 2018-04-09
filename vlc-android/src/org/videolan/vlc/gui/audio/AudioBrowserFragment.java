@@ -162,7 +162,7 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
             for (View rv : mLists)
                 registerForContextMenu(rv);
             mViewPager.addOnPageChangeListener(this);
-            mFabPlay.setImageResource(R.drawable.ic_fab_shuffle);
+//            mFabPlay.setImageResource(R.drawable.ic_fab_shuffle);
             setFabPlayShuffleAllVisibility();
         } else {
             mMediaLibrary.removeMediaUpdatedCb();
@@ -580,7 +580,7 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
 
     @MainThread
     private void updateLists() {
-        mTabLayout.setVisibility(View.VISIBLE);
+        mTabLayout.setVisibility(View.GONE);
         mHandler.sendEmptyMessageDelayed(SET_REFRESHING, 300);
         mHandler.removeMessages(UPDATE_LIST);
         updateArtists();

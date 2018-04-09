@@ -135,7 +135,7 @@ public class ExtensionsManager {
     }
 
     public void displayPlugin(Activity activity, int id, ExtensionListing extension, boolean visible) {
-        if (visible) {
+        /*if (visible) {
             MenuItem extensionGroup = ((NavigationView)activity.findViewById(R.id.navigation)).getMenu().findItem(R.id.extensions_group);
             extensionGroup.setVisible(true);
             MenuItem item = extensionGroup.getSubMenu().add(R.id.extensions_group, id, 0, extension.title());
@@ -156,7 +156,7 @@ public class ExtensionsManager {
                 } catch (PackageManager.NameNotFoundException e) {
                     item.setIcon(R.drawable.icon);
                 }
-        }
+        }*/
     }
 
     public void showExtensionPermissionDialog(final Activity activity, final int id, final ExtensionListing extension, final String key) {
@@ -187,7 +187,7 @@ public class ExtensionsManager {
                         for (int i=0; i<extraTitles.size(); i++)
                             PreferenceManager.getDefaultSharedPreferences(activity.getApplication()).edit().putBoolean(extraKeys.get(i), extraCheckedStates[i]).apply();
                         displayPlugin(activity, id, extension, true);
-                        activity.findViewById(R.id.navigation).postInvalidate();
+//                        activity.findViewById(R.id.navigation).postInvalidate();
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
