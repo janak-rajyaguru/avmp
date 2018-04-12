@@ -50,4 +50,5 @@
 
     //added
     <color name="red">#D11919</color>
+    <color name="red_toolbar">#D63232</color>
 </resources>

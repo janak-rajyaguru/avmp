@@ -35,6 +35,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.circlerefresh.CircleRefreshLayout;
+
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.media.MediaLibraryItem;
 import org.videolan.medialibrary.media.MediaWrapper;
@@ -49,7 +51,7 @@ import org.videolan.vlc.media.MediaUtils;
 
 import java.util.List;
 
-public class HistoryFragment extends MediaBrowserFragment implements IRefreshable, IHistory, SwipeRefreshLayout.OnRefreshListener, IEventsHandler {
+public class HistoryFragment extends MediaBrowserFragment implements IRefreshable, IHistory, CircleRefreshLayout.OnCircleRefreshListener, IEventsHandler {
 
     public final static String TAG = "VLC/HistoryFragment";
 
@@ -163,7 +165,7 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
                     mHistoryAdapter.setList((MediaWrapper[]) msg.obj);
                     updateEmptyView();
                     mHistoryAdapter.notifyDataSetChanged();
-                    mSwipeRefreshLayout.setRefreshing(false);
+//                    mSwipeRefreshLayout.setRefreshing(false);
                     getActivity().supportInvalidateOptionsMenu();
             }
         }
@@ -278,5 +280,15 @@ public class HistoryFragment extends MediaBrowserFragment implements IRefreshabl
     @Override
     public void onUpdateFinished(RecyclerView.Adapter adapter) {
         invalidateActionMode();
+    }
+
+    @Override
+    public void completeRefresh() {
+        mSwipeRefreshLayout.finishRefreshing();
+    }
+
+    @Override
+    public void refreshing() {
+
     }
 }

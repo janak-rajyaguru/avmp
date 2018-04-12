@@ -355,7 +355,7 @@ public class NavigationTabStrip extends View implements ViewPager.OnPageChangeLi
         try {
             tempTypeface = Typeface.createFromAsset(getContext().getAssets(), typeface);
         } catch (Exception e) {
-            tempTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
+            tempTypeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
             e.printStackTrace();
         }
 

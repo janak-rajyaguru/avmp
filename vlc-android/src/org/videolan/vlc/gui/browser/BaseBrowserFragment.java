@@ -54,6 +54,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import com.circlerefresh.CircleRefreshLayout;
+
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.libvlc.util.MediaBrowser;
@@ -84,7 +86,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAdapter> implements IRefreshable, MediaBrowser.EventListener, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, Filterable, IEventsHandler {
+public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAdapter> implements IRefreshable, MediaBrowser.EventListener, CircleRefreshLayout.OnCircleRefreshListener, View.OnClickListener, Filterable, IEventsHandler {
     protected static final String TAG = "VLC/BaseBrowserFragment";
 
     public static final String KEY_MRL = "key_mrl";
@@ -366,7 +368,7 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
         if (mSwipeRefreshLayout == null)
             return;
         if (mAdapter.isEmpty()) {
-            if (mSwipeRefreshLayout.isRefreshing()) {
+            if (mSwipeRefreshLayout.getVisibility() == View.VISIBLE) {
                 mEmptyView.setText(R.string.loading);
                 mEmptyView.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.GONE);
@@ -462,13 +464,13 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
             if (fragment == null) return;
             switch (msg.what){
                 case MSG_SHOW_LOADING:
-                    if (fragment.mSwipeRefreshLayout != null)
-                        fragment.mSwipeRefreshLayout.setRefreshing(true);
+                    /*if (fragment.mSwipeRefreshLayout != null)
+                        fragment.mSwipeRefreshLayout.setRefreshing(true);*/
                     break;
                 case MSG_HIDE_LOADING:
                     removeMessages(MSG_SHOW_LOADING);
-                    if (fragment.mSwipeRefreshLayout != null)
-                        fragment.mSwipeRefreshLayout.setRefreshing(false);
+                    /*if (fragment.mSwipeRefreshLayout != null)
+                        fragment.mSwipeRefreshLayout.setRefreshing(false);*/
                     break;
                 case MSG_REFRESH:
                     if (!fragment.isDetached()) fragment.refresh();
@@ -919,5 +921,15 @@ public abstract class BaseBrowserFragment extends SortableFragment<BaseBrowserAd
 
     public boolean isSortEnabled() {
         return false;
+    }
+
+    @Override
+    public void completeRefresh() {
+        mSwipeRefreshLayout.finishRefreshing();
+    }
+
+    @Override
+    public void refreshing() {
+
     }
 }

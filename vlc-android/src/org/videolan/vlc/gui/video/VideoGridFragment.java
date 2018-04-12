@@ -46,6 +46,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 
+import com.circlerefresh.CircleRefreshLayout;
+
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.interfaces.MediaAddedCb;
@@ -73,7 +75,7 @@ import org.videolan.vlc.util.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoGridFragment extends SortableFragment<VideoListAdapter> implements MediaUpdatedCb, SwipeRefreshLayout.OnRefreshListener, MediaAddedCb, Filterable, IEventsHandler {
+public class VideoGridFragment extends SortableFragment<VideoListAdapter> implements MediaUpdatedCb, CircleRefreshLayout.OnCircleRefreshListener, MediaAddedCb, Filterable, IEventsHandler {
 
     private final static String TAG = "VLC/VideoListFragment";
 
@@ -508,11 +510,11 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
                     updateList();
                     break;
                 case SET_REFRESHING:
-                    mSwipeRefreshLayout.setRefreshing(true);
+//                    mSwipeRefreshLayout.setRefreshing(true);
                     break;
                 case UNSET_REFRESHING:
                     removeMessages(SET_REFRESHING);
-                    mSwipeRefreshLayout.setRefreshing(false);
+//                    mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 default:
                     super.handleMessage(msg);
@@ -574,5 +576,15 @@ public class VideoGridFragment extends SortableFragment<VideoListAdapter> implem
     public void updateSeenMediaMarker() {
         mAdapter.setSeenMediaMarkerVisible(PreferenceManager.getDefaultSharedPreferences(VLCApplication.getAppContext()).getBoolean("media_seen", true));
         mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount()-1, VideoListAdapter.UPDATE_SEEN);
+    }
+
+    @Override
+    public void completeRefresh() {
+        mSwipeRefreshLayout.finishRefreshing();
+    }
+
+    @Override
+    public void refreshing() {
+
     }
 }

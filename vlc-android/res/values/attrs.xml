@@ -66,8 +66,8 @@
     <attr name="ic_popup_expand" format="reference" />
     <attr name="ic_popup_dim" format="reference" />
 
-    <attr name="shadow_top_9patch" format="reference"/>
-    <attr name="shadow_bottom_9patch" format="reference"/>
+    <attr name="shadow_top_9patch" format="reference" />
+    <attr name="shadow_bottom_9patch" format="reference" />
 
     <attr name="advanced_options_style" format="reference" />
     <attr name="rounded_bg" format="reference" />
@@ -80,27 +80,33 @@
 
     //added
     <declare-styleable name="NavigationTabStrip">
-        <attr name="nts_color" format="color"/>
-        <attr name="nts_size" format="dimension"/>
-        <attr name="nts_weight" format="dimension"/>
-        <attr name="nts_factor" format="float"/>
-        <attr name="nts_titles" format="reference"/>
+        <attr name="nts_color" format="color" />
+        <attr name="nts_size" format="dimension" />
+        <attr name="nts_weight" format="dimension" />
+        <attr name="nts_factor" format="float" />
+        <attr name="nts_titles" format="reference" />
 
         <attr name="nts_type" format="enum">
-            <enum name="line" value="0"/>
-            <enum name="point" value="1"/>
+            <enum name="line" value="0" />
+            <enum name="point" value="1" />
         </attr>
         <attr name="nts_gravity" format="enum">
-            <enum name="bottom" value="0"/>
-            <enum name="top" value="1"/>
+            <enum name="bottom" value="0" />
+            <enum name="top" value="1" />
         </attr>
 
-        <attr name="nts_typeface" format="string"/>
-        <attr name="nts_corners_radius" format="dimension"/>
-        <attr name="nts_animation_duration" format="integer"/>
+        <attr name="nts_typeface" format="string" />
+        <attr name="nts_corners_radius" format="dimension" />
+        <attr name="nts_animation_duration" format="integer" />
 
-        <attr name="nts_inactive_color" format="color"/>
-        <attr name="nts_active_color" format="color"/>
+        <attr name="nts_inactive_color" format="color" />
+        <attr name="nts_active_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CirCleRefreshLayout">
+        <attr name="AniBackColor" format="color" />
+        <attr name="AniForeColor" format="color" />
+        <attr name="CircleSmaller" format="integer" />
     </declare-styleable>
 
 </resources>

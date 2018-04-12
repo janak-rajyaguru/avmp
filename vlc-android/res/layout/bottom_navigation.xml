@@ -26,14 +26,14 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginStart="5dp"
-        app:nts_active_color="@color/red"
-        app:nts_color="@color/white"
-        app:nts_corners_radius="3.5dp"
+        app:nts_active_color="@color/white"
+        app:nts_color="@color/red"
+        app:nts_corners_radius="4dp"
         app:nts_size="16sp"
         app:nts_gravity="bottom"
         app:nts_inactive_color="@color/grey600"
         app:nts_titles="@array/bottom_navigation_options"
         app:nts_type="point"
         app:nts_typeface="fonts/moon.otf"
-        app:nts_weight="5dp" />
+        app:nts_weight="7dp" />
 </FrameLayout>

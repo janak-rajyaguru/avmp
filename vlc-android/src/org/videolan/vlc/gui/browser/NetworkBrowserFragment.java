@@ -258,7 +258,7 @@ public class NetworkBrowserFragment extends BaseBrowserFragment implements Exter
             return;
         if (ExternalMonitor.isConnected()) {
             if (mAdapter.isEmpty()) {
-                if (mSwipeRefreshLayout == null || mSwipeRefreshLayout.isRefreshing()) {
+                if (mSwipeRefreshLayout == null || (mSwipeRefreshLayout.getVisibility() == View.VISIBLE)) {
                     mEmptyView.setText(R.string.loading);
                     mEmptyView.setVisibility(View.VISIBLE);
                     mRecyclerView.setVisibility(View.GONE);

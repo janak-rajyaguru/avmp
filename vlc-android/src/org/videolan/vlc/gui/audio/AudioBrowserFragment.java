@@ -42,6 +42,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import com.circlerefresh.CircleRefreshLayout;
+
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.interfaces.MediaAddedCb;
 import org.videolan.medialibrary.interfaces.MediaUpdatedCb;
@@ -71,7 +73,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefreshLayout.OnRefreshListener, ViewPager.OnPageChangeListener, Medialibrary.ArtistsAddedCb, Medialibrary.ArtistsModifiedCb, Medialibrary.AlbumsAddedCb, Medialibrary.AlbumsModifiedCb, MediaAddedCb, MediaUpdatedCb, TabLayout.OnTabSelectedListener {
+public class AudioBrowserFragment extends BaseAudioBrowser implements CircleRefreshLayout.OnCircleRefreshListener, ViewPager.OnPageChangeListener, Medialibrary.ArtistsAddedCb, Medialibrary.ArtistsModifiedCb, Medialibrary.AlbumsAddedCb, Medialibrary.AlbumsModifiedCb, MediaAddedCb, MediaUpdatedCb, TabLayout.OnTabSelectedListener {
     public final static String TAG = "VLC/AudioBrowserFragment";
 
     private final AudioBrowserAdapter mSongsAdapter = new AudioBrowserAdapter(MediaLibraryItem.TYPE_MEDIA, this, true);
@@ -556,11 +558,11 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
                 fragment.updateLists();
                 break;
             case SET_REFRESHING:
-                fragment.mSwipeRefreshLayout.setRefreshing(true);
+//                fragment.mSwipeRefreshLayout.setRefreshing(true);
                 break;
             case UNSET_REFRESHING:
                 removeMessages(SET_REFRESHING);
-                fragment.mSwipeRefreshLayout.setRefreshing(false);
+//                fragment.mSwipeRefreshLayout.setRefreshing(false);
                 break;
             case UPDATE_EMPTY_VIEW:
                 fragment.updateEmptyView(fragment.mViewPager.getCurrentItem());
@@ -698,5 +700,15 @@ public class AudioBrowserFragment extends BaseAudioBrowser implements SwipeRefre
     @Override
     public int sortDirection(int sortby) {
         return getCurrentAdapter().sortDirection(sortby);
+    }
+
+    @Override
+    public void completeRefresh() {
+        mSwipeRefreshLayout.finishRefreshing();
+    }
+
+    @Override
+    public void refreshing() {
+
     }
 }

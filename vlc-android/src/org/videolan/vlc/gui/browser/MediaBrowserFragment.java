@@ -41,6 +41,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.circlerefresh.CircleRefreshLayout;
+
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.medialibrary.Medialibrary;
 import org.videolan.medialibrary.media.MediaLibraryItem;
@@ -64,7 +66,7 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
 
     public final static String TAG = "VLC/MediaBrowserFragment";
 
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected CircleRefreshLayout mSwipeRefreshLayout;
     protected volatile boolean mReadyToDisplay = true;
     protected Medialibrary mMediaLibrary;
     protected ActionMode mActionMode;
@@ -81,8 +83,8 @@ public abstract class MediaBrowserFragment extends PlaybackServiceFragment imple
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (mSwipeRefreshLayout != null)
-            mSwipeRefreshLayout.setColorSchemeResources(R.color.orange700);
+        /*if (mSwipeRefreshLayout != null)
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.orange700);*/
 //            mFabPlay = getActivity().findViewById(R.id.fab);
     }
 

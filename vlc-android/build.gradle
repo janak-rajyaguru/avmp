@@ -168,6 +168,7 @@ dependencies {
     implementation project(':medialibrary')
     implementation project(':api')
     implementation project(':axmlrpc')
+    implementation project(':circlerefresh')
     // AppCompat
     kapt 'com.android.databinding:compiler:3.0.1'
     implementation "com.android.support:recyclerview-v7:$rootProject.ext.appCompatVersion"
@@ -186,7 +187,6 @@ dependencies {
 
     //added
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-//    compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
 }
 
 kotlin {

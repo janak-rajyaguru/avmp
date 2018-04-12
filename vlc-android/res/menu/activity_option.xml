@@ -7,7 +7,7 @@
         android:id="@+id/ml_menu_renderers"
         android:icon="@drawable/ic_am_renderer_normal_w"
         android:title="@string/searchable_hint"
-        vlc:showAsAction="always|collapseActionView"
+        vlc:showAsAction="never"
         android:visible="false"/>
 
     <item
@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_menu_search_normal_w"
         vlc:actionViewClass="android.support.v7.widget.SearchView"
         android:title="@string/searchable_hint"
-        vlc:showAsAction="always|collapseActionView"/>
+        vlc:showAsAction="never"/>
     <item
         android:orderInCategory="2"
         android:id="@+id/ml_menu_last_playlist"
